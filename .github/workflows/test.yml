@@ -1,0 +1,24 @@
+name: Terraform Deploy
+on: 
+  push: 
+    branch : [main]
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ACESSKEY}}
+      AWS_SECRET_ACCESS_KEY: ${{SECRETKEY}}
+      AWS_DEFAULT_REGION: us-east-1
+    steps:
+      - name: Checkout
+      uses:actions/checkout@v4
+      -name: Terraform Setup
+      uses: hasicorp/setup-terraform@v3
+      -name: Terraform Init
+      run: terraform init
+      -name: Terraform plna
+      run: terraform plan
+      
+    
+
