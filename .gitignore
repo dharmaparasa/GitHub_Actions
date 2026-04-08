@@ -1,4 +1,4 @@
- *.hcl
- *.tfstate
- *.backup
- *.terraform/*
+*.hcl
+*.tfstate
+*.backup
+.terraform/*
