@@ -28,9 +28,6 @@ resource "aws_security_group" "name" {
     }
 }
 
-variable "ingress-rule-map" {
-  type = map(string)
-}
 
 
 
