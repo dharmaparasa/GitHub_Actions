@@ -1,3 +1,41 @@
+resource "aws_security_group" "name" {
+    name = "DharmaSG"
+
+
+    dynamic "ingress" {
+      for_each = [
+        for port,cidr in {
+          22 = "0.0.0.0/0" }:{
+          from_port=port
+          to_port=port
+          cidr_blocks=[cidr]
+          protocol="tcp"
+        }
+      ]
+      content {
+          from_port   = ingress.value.from_port
+          to_port     = ingress.value.to_port
+          protocol    = ingress.value.protocol
+          cidr_blocks = ingress.value.cidr_blocks
+      }
+    }
+
+    egress {
+        from_port = 0
+        to_port= 0
+        protocol = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+}
+
+variable "ingress-rule-map" {
+  type = map(string)
+}
+
+
+
+#=================================================================
+
 resource "aws_instance" "name" {
     instance_type = "t3.micro"
     ami = "ami-03caad32a158f72db"
@@ -5,7 +43,10 @@ resource "aws_instance" "name" {
       Name="Dharma"
     }
     key_name = "dkp"
+    
+    #mention for another region
     subnet_id = "subnet-08fbc8f0db1f0486f"
+    security_groups = [aws_security_group.name.id]
 }
 
 
