@@ -47,7 +47,6 @@ jobs:
       #Connect EC2 Via SSH, Install and run the python
       - name: Connecting To EC2
         run: |
-          sudo su -
           echo "${{secrets.SSHKEY}}" > key.pem
           chmod 600 key.pem
           ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@$(terraform output -raw public_ip) << 'EOF'
@@ -55,14 +54,14 @@ jobs:
           sudo yum install -y python3-pip
           sudo pip3 install virtualenv
 
-          cd /opt
-          git clone https://github.com/dharmaparasa/FrontendBackend.git
-          cd /opt/FrontendBackend/backend
+          sudo cd /opt
+          sudo git clone https://github.com/dharmaparasa/FrontendBackend.git
+          sudo cd /opt/FrontendBackend/backend
 
-          python3 -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
-          cat << EOT > /etc/systemd/system/myapp.service
+          sudo python3 -m venv venv
+          sudo source venv/bin/activate
+          sudo pip install -r requirements.txt
+          sudo cat << EOT > /etc/systemd/system/myapp.service
           [Unit]
           Description=My Python App
           After=network.target
@@ -78,9 +77,9 @@ jobs:
           WantedBy=multi-user.target
           EOT
 
-          systemctl daemon-reexec
-          systemctl daemon-reload
-          systemctl enable myapp
-          systemctl start myapp
+          sudo systemctl daemon-reexec
+          sudo systemctl daemon-reload
+          sudo systemctl enable myapp
+          sudo systemctl start myapp
           EOF
 
