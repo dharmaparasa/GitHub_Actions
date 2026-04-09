@@ -47,7 +47,7 @@ jobs:
         run: |
           echo "${{secrets.SSHKEY}}" > key.pem
           chmod 600 key.pem
-          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@$(echo "terraform output -raw public_ip") << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@$(terraform output -raw public_ip) << 'EOF'
           sudo yum install -y git
           sudo yum install -y python3-pip
           sudo pip3 install virtualenv
