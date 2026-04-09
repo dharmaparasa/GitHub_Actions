@@ -3,8 +3,10 @@
 #change subnet, vpcid and keypair name in the code
 
 resource "aws_security_group" "name" {
-    name = "DharmaSG"
-
+    # name = "DharmaSG"
+    tags = {
+      Name="dsg"
+    }
     vpc_id = "vpc-0a0653a840184508e"
     dynamic "ingress" {
       for_each = [
