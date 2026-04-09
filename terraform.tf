@@ -4,7 +4,7 @@ resource "aws_instance" "name" {
     tags = {
       Name="Dharma"
     }
-    key_name = "DP"
+    key_name = "dkp"
     subnet_id = "subnet-08fbc8f0db1f0486f"
 }
 
