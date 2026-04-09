@@ -1,3 +1,7 @@
+#Create VPC etc
+#Create a keypair in same region as in provider
+#change subnet, vpcid and keypair name in the code
+
 resource "aws_security_group" "name" {
     name = "DharmaSG"
 
@@ -39,7 +43,7 @@ resource "aws_instance" "name" {
     tags = {
       Name="Dharma"
     }
-    key_name = "dkp"
+    key_name = "pdl"
     
     #mention for another region
     subnet_id = "subnet-0b654b6b7c4b61498"
