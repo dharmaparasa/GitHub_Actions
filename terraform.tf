@@ -1,7 +1,7 @@
 resource "aws_security_group" "name" {
     name = "DharmaSG"
 
-    vpc_id = "vpc-0a0653a840184508e"
+    # vpc_id = "vpc-0a0653a840184508e"
     dynamic "ingress" {
       for_each = [
         for port,cidr in {
@@ -42,7 +42,7 @@ resource "aws_instance" "name" {
     key_name = "dkp"
     
     #mention for another region
-    subnet_id = "subnet-08fbc8f0db1f0486f"
+    subnet_id = "subnet-0b654b6b7c4b61498"
     security_groups = [aws_security_group.name.id]
 }
 
