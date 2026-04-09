@@ -1,6 +1,6 @@
 resource "aws_instance" "name" {
     instance_type = "t3.micro"
-    ami = "ami-02dfbd4ff395f2a1b"
+    ami = "ami-03caad32a158f72db"
     tags = {
       Name="Dharma"
     }
