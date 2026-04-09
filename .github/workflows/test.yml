@@ -45,6 +45,7 @@ jobs:
       #Connect EC2 Via SSH, Install and run the python
       - name: Connecting To EC2
         run: |
+          sudo su -
           echo "${{secrets.SSHKEY}}" > key.pem
           chmod 600 key.pem
           ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@$(terraform output -raw public_ip) << 'EOF'
@@ -59,7 +60,7 @@ jobs:
           python3 -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
-          cat <<EOF > /etc/systemd/system/myapp.service
+          cat << EOT > /etc/systemd/system/myapp.service
           [Unit]
           Description=My Python App
           After=network.target
@@ -67,17 +68,17 @@ jobs:
           [Service]
           User=ec2-user
           WorkingDirectory=/opt/FrontendBackend/backend
-          EnvironmentFile=/etc/myapp.env
           ExecStart=/opt/FrontendBackend/backend/venv/bin/python app.py
           Restart=always
           RestartSec=5
 
           [Install]
           WantedBy=multi-user.target
-          EOF
+          EOT
 
           systemctl daemon-reexec
           systemctl daemon-reload
           systemctl enable myapp
           systemctl start myapp
+          EOF
 
