@@ -4,7 +4,9 @@ resource "aws_instance" "name" {
     tags = {
       Name="Dharma"
     }
+    key_name = "DP"
 }
+
 
 output "public_ip" {
   value = aws_instance.name.public_ip
