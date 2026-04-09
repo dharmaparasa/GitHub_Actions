@@ -52,16 +52,14 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@$(terraform output -raw public_ip) << 'EOF'
           sudo yum install -y git
           sudo yum install -y python3-pip
-          sudo pip3 install virtualenv
 
-          sudo cd /opt
-          sudo git clone https://github.com/dharmaparasa/FrontendBackend.git
-          sudo cd /opt/FrontendBackend/backend
+          cd /opt
+          git clone https://github.com/dharmaparasa/FrontendBackend.git
+          cd /opt/FrontendBackend/backend
 
-          sudo python3 -m venv venv
-          sudo source venv/bin/activate
-          sudo pip install -r requirements.txt
-          sudo cat << EOT > /etc/systemd/system/myapp.service
+          python3 -m venv venv
+          venv/bin/pip install -r requirements.txt
+          sudo tee /etc/systemd/system/myapp.service > /dev/null << EOT
           [Unit]
           Description=My Python App
           After=network.target
