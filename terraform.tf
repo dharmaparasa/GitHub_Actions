@@ -5,6 +5,7 @@ resource "aws_instance" "name" {
       Name="Dharma"
     }
     key_name = "DP"
+    subnet_id = "subnet-08fbc8f0db1f0486f"
 }
 
 
