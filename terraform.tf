@@ -1,7 +1,7 @@
 resource "aws_security_group" "name" {
     name = "DharmaSG"
 
-    # vpc_id = "vpc-0a0653a840184508e"
+    vpc_id = "vpc-0a0653a840184508e"
     dynamic "ingress" {
       for_each = [
         for port,cidr in {
