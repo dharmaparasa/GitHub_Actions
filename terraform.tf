@@ -48,6 +48,7 @@ resource "aws_instance" "name" {
     #mention for another region
     subnet_id = "subnet-0b654b6b7c4b61498"
     security_groups = [aws_security_group.name.id]
+    associate_public_ip_address = true
 }
 
 
