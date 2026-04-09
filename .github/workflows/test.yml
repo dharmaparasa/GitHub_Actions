@@ -41,6 +41,8 @@ jobs:
         run: terraform plan
       - name: Terraform Apply
         run: terraform apply --auto-approve
+      - name: Wait for EC2
+        run: sleep 60
 
       #Connect EC2 Via SSH, Install and run the python
       - name: Connecting To EC2
