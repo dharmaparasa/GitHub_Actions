@@ -53,9 +53,9 @@ jobs:
           sudo yum install -y git
           sudo yum install -y python3-pip
 
-          cd /opt
+          cd /home/ec2-user
           git clone https://github.com/dharmaparasa/FrontendBackend.git
-          cd /opt/FrontendBackend/backend
+          cd /home/ec2-user/FrontendBackend/backend
 
           python3 -m venv venv
           venv/bin/pip install -r requirements.txt
@@ -66,8 +66,8 @@ jobs:
 
           [Service]
           User=ec2-user
-          WorkingDirectory=/opt/FrontendBackend/backend
-          ExecStart=/opt/FrontendBackend/backend/venv/bin/python app.py
+          WorkingDirectory=/home/ec2-user/FrontendBackend/backend
+          ExecStart=/home/ec2-user/FrontendBackend/backend/venv/bin/python app.py
           Restart=always
           RestartSec=5
 
